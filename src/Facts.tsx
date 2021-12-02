@@ -16,7 +16,7 @@ function Facts() {
     const getFact = async (e: MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         console.log("Click!");
-        const url = "https://uselessfacts.jsph.pl/random.json";
+        const url = "https://uselessfacts.jsph.pl/random.json?language=en";
         setIsLoading(true);
         setFact("Searching...");
         const response = await fetch(url);
