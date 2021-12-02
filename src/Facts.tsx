@@ -16,23 +16,39 @@ function Facts() {
         e.preventDefault();
         console.log("Click!");
         const url = "https://uselessfacts.jsph.pl/random.json";
+        setIsLoading(true);
+        setFact("Searching...");
         const response = await fetch(url);
+
+        if (response.status === 429) {
+            const time = new Date().toLocaleTimeString();
+            setFact(`(${time}) Too many attempts! Try again later :)`);
+            setIsLoading(false);
+            return;
+        }
 
         if (!response.ok) {
             console.error(await response.text());
+            setIsLoading(false);
             return;
         }
 
         const json = (await response.json()) as FactResponse;
+        setIsLoading(false);
         setFact(json.text);
     };
 
+    const [isLoading, setIsLoading] = useState<boolean>(false);
     const [fact, setFact] = useState<string>("Initial fact");
 
     return (
         <div className="Facts">
             <p>{fact}</p>
-            <button onClick={getFact}>Search fact</button>
+            <button onClick={getFact} disabled={isLoading}>
+                Search fact
+            </button>
+            <br />
+            <p>Powered by: https://uselessfacts.jsph.pl</p>
         </div>
     );
 }
