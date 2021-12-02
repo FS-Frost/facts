@@ -1,6 +1,7 @@
 import React, { MouseEvent, useState } from "react";
 // import logo from "./logo.svg";
 import "./App.css";
+import "./Facts.css";
 
 interface FactResponse {
     id: string;
@@ -39,16 +40,23 @@ function Facts() {
     };
 
     const [isLoading, setIsLoading] = useState<boolean>(false);
-    const [fact, setFact] = useState<string>("Initial fact");
+    const [fact, setFact] = useState<string>("");
+    const apiBaseUrl = "https://uselessfacts.jsph.pl";
+    const repoUrl = "https://github.com/FS-Frost/facts";
 
     return (
         <div className="Facts">
             <p>{fact}</p>
-            <button onClick={getFact} disabled={isLoading}>
+            <button className="btn-search" onClick={getFact} disabled={isLoading}>
                 Search fact
             </button>
             <br />
-            <p>Powered by: https://uselessfacts.jsph.pl</p>
+            <p>
+                Source code: <a href={repoUrl}>{repoUrl}</a>
+            </p>
+            <p>
+                Useless facts API: <a href={apiBaseUrl}>{apiBaseUrl}</a>
+            </p>
         </div>
     );
 }
