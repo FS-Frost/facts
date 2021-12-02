@@ -24,6 +24,7 @@ function Facts() {
         if (response.status === 429) {
             const time = new Date().toLocaleTimeString();
             setFact(`(${time}) Too many attempts! Try again later :)`);
+            setFactUrl("");
             setIsLoading(false);
             return;
         }
@@ -31,17 +32,20 @@ function Facts() {
         if (!response.ok) {
             console.error(await response.text());
             setIsLoading(false);
+            setFact("Ups, try again.");
+            setFactUrl("");
             return;
         }
 
         const json = (await response.json()) as FactResponse;
         setIsLoading(false);
         setFact(json.text);
+        setFactUrl(json.permalink);
     };
 
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [fact, setFact] = useState<string>("");
-    const apiBaseUrl = "https://uselessfacts.jsph.pl";
+    const [factUrl, setFactUrl] = useState<string>("https://uselessfacts.jsph.pl");
     const repoUrl = "https://github.com/FS-Frost/facts";
 
     return (
@@ -52,10 +56,16 @@ function Facts() {
             </button>
             <br />
             <p>
-                Source code: <a href={repoUrl}>{repoUrl}</a>
+                Fact URL:{" "}
+                <a href={factUrl} target="_blank">
+                    {factUrl}
+                </a>
             </p>
             <p>
-                Useless facts API: <a href={apiBaseUrl}>{apiBaseUrl}</a>
+                Source code:{" "}
+                <a href={repoUrl} target="_blank">
+                    {repoUrl}
+                </a>
             </p>
         </div>
     );
