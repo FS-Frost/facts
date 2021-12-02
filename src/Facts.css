@@ -3,3 +3,25 @@
     height: fit-content;
     font-size: large;
 }
+
+.facts-search p {
+    min-height: 80px;
+    overflow-wrap: anywhere;
+}
+
+.facts-search textarea {
+    width: 100%;
+    height: 150px;
+}
+
+.facts-links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.facts-links p {
+    text-align: left;
+    width: 600px;
+    font-size: large;
+}

@@ -1,72 +1,119 @@
-import React, { MouseEvent, useState } from "react";
-// import logo from "./logo.svg";
+import { useCallback, useEffect, useState } from "react";
 import "./App.css";
 import "./Facts.css";
-
-interface FactResponse {
-    id: string;
-    text: string;
-    source: string;
-    source_url: string;
-    language: string;
-    permalink: string;
-}
+import { FactClientResponse, getRandomFact, getTodayFact } from "./FactsClient";
 
 function Facts() {
-    const getFact = async (e: MouseEvent<HTMLButtonElement>) => {
-        e.preventDefault();
-        console.log("Click!");
-        const url = "https://uselessfacts.jsph.pl/random.json?language=en";
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [shouldShowJson, setShouldShowJson] = useState<boolean>(false);
+    const [fact, setFact] = useState<string>("");
+    const [language, setLanguage] = useState<string>("en");
+    const [rawResponse, setRawResponse] = useState<string>("");
+    const [factUrl, setFactUrl] = useState<string>("https://uselessfacts.jsph.pl");
+    const repoUrl = "https://github.com/FS-Frost/facts";
+
+    const getFact = async () => {
         setIsLoading(true);
-        setFact("Searching...");
-        const response = await fetch(url);
+        setFact("Loading...");
+        const response = await getRandomFact(language);
+        handleResponse(response);
+        setIsLoading(false);
+    };
+
+    const onMount = useCallback(async () => {
+        setIsLoading(true);
+        setFact("Loading...");
+        const response = await getTodayFact("en");
+        handleResponse(response);
+        setIsLoading(false);
+    }, []);
+
+    const handleResponse = (response: FactClientResponse | undefined) => {
+        if (response == null) {
+            return;
+        }
+
+        setRawResponse(JSON.stringify(response, null, 2));
 
         if (response.status === 429) {
             const time = new Date().toLocaleTimeString();
             setFact(`(${time}) Too many attempts! Try again later :)`);
             setFactUrl("");
-            setIsLoading(false);
             return;
         }
 
-        if (!response.ok) {
-            console.error(await response.text());
-            setIsLoading(false);
+        if (response.json == null) {
             setFact("Ups, try again.");
             setFactUrl("");
             return;
         }
 
-        const json = (await response.json()) as FactResponse;
-        setIsLoading(false);
-        setFact(json.text);
-        setFactUrl(json.permalink);
+        setFact(response.json.text);
+        setFactUrl(response.json.permalink);
     };
 
-    const [isLoading, setIsLoading] = useState<boolean>(false);
-    const [fact, setFact] = useState<string>("");
-    const [factUrl, setFactUrl] = useState<string>("https://uselessfacts.jsph.pl");
-    const repoUrl = "https://github.com/FS-Frost/facts";
+    const toggleDebugMode = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setShouldShowJson(e.target.checked);
+    };
+
+    useEffect(() => {
+        onMount();
+    }, [onMount]);
+
+    useEffect(() => {
+        getFact();
+    }, [language]);
 
     return (
         <div className="Facts">
-            <p>{fact}</p>
-            <button className="btn-search" onClick={getFact} disabled={isLoading}>
-                Search fact
-            </button>
-            <br />
-            <p>
-                Fact URL:{" "}
-                <a href={factUrl} target="_blank">
-                    {factUrl}
-                </a>
-            </p>
-            <p>
-                Source code:{" "}
-                <a href={repoUrl} target="_blank">
-                    {repoUrl}
-                </a>
-            </p>
+            <div className="facts-search">
+                {shouldShowJson ? <textarea value={rawResponse} readOnly /> : <p>{fact}</p>}
+                <br />
+                <button
+                    className="btn-search"
+                    onClick={() => {
+                        getFact();
+                    }}
+                    disabled={isLoading}
+                >
+                    Search fact
+                </button>
+            </div>
+
+            <div>
+                <label htmlFor="languages">Language: </label>
+                <select
+                    name="languages"
+                    onChange={(e) => {
+                        setLanguage(e.target.value);
+                    }}
+                >
+                    <option value="en">English</option>
+                    <option value="de">German</option>
+                    {/* <option value="random">Surprise me</option> */}
+                </select>
+            </div>
+
+            <div className="facts-debug">
+                <label>Debug mode</label>
+                <input type="checkbox" checked={shouldShowJson} onChange={toggleDebugMode} />
+            </div>
+
+            <div className="facts-links">
+                <p>
+                    Fact URL:{" "}
+                    <a href={factUrl} target="_blank" rel="noreferrer">
+                        {factUrl}
+                    </a>
+                </p>
+
+                <p>
+                    Source code:{" "}
+                    <a href={repoUrl} target="_blank" rel="noreferrer">
+                        {repoUrl}
+                    </a>
+                </p>
+            </div>
         </div>
     );
 }
