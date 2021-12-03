@@ -6,15 +6,22 @@ on:
             - master
 
 jobs:
-    build-and-deploy:
+    test-build-deploy:
         runs-on: ubuntu-latest
         steps:
             - name: Checkout 🛎️
               uses: actions/checkout@v2.3.1
 
-            - name: Install and Build 🔧
+            - name: Install
               run: |
                   npm install
+
+            - name: Run tests
+              run: |
+                  npm run-script test
+
+            - name: Build 🔧
+              run: |
                   npm run-script build
 
             - name: Deploy 🚀
