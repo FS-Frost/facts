@@ -10,7 +10,6 @@ function Facts() {
     const [language, setLanguage] = useState<string>("en");
     const [rawResponse, setRawResponse] = useState<string>("");
     const [factUrl, setFactUrl] = useState<string>("https://uselessfacts.jsph.pl");
-    const repoUrl = "https://github.com/FS-Frost/facts";
 
     const showLoading = () => {
         setIsLoading(true);
@@ -117,13 +116,6 @@ function Facts() {
                     Fact URL:{" "}
                     <a href={factUrl} target="_blank" rel="noreferrer">
                         {factUrl}
-                    </a>
-                </p>
-
-                <p>
-                    Source code:{" "}
-                    <a href={repoUrl} target="_blank" rel="noreferrer">
-                        {repoUrl}
                     </a>
                 </p>
             </div>
