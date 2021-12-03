@@ -12,21 +12,27 @@ function Facts() {
     const [factUrl, setFactUrl] = useState<string>("https://uselessfacts.jsph.pl");
     const repoUrl = "https://github.com/FS-Frost/facts";
 
-    const getFact = async () => {
+    const showLoading = () => {
         setIsLoading(true);
-        setFact("Loading...");
-        const response = await getRandomFact(language);
-        handleResponse(response);
+        const msg = "Loading...";
+        setFact(msg);
+        setRawResponse(msg);
+    };
+
+    const hideLoading = () => {
         setIsLoading(false);
     };
 
-    const onMount = useCallback(async () => {
-        setIsLoading(true);
-        setFact("Loading...");
-        const response = await getTodayFact("en");
-        handleResponse(response);
-        setIsLoading(false);
-    }, []);
+    const getFact = useCallback(() => {
+        const f = async () => {
+            showLoading();
+            const response = await getRandomFact(language);
+            handleResponse(response);
+            hideLoading();
+        };
+
+        f();
+    }, [language]);
 
     const handleResponse = (response: FactClientResponse | undefined) => {
         if (response == null) {
@@ -57,12 +63,19 @@ function Facts() {
     };
 
     useEffect(() => {
+        const onMount = async () => {
+            showLoading();
+            const response = await getTodayFact("en");
+            handleResponse(response);
+            hideLoading();
+        };
+
         onMount();
-    }, [onMount]);
+    }, []);
 
     useEffect(() => {
         getFact();
-    }, [language]);
+    }, [getFact]);
 
     return (
         <div className="Facts">
