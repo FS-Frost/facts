@@ -24,7 +24,7 @@
 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.2.3/gh-fork-ribbon.min.css" />
 
-        <title>React App</title>
+        <title>Facts</title>
     </head>
     <body>
         <a
@@ -39,14 +39,28 @@
 
         <noscript>You need to enable JavaScript to run this app.</noscript>
         <div id="root"></div>
-        <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
 
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    --></body>
+        <script>
+            if ("serviceWorker" in navigator) {
+                window.addEventListener("load", function () {
+                    navigator.serviceWorker
+                        .register("./worker.js")
+                        .then(
+                            function (registration) {
+                                console.log("Worker registration successful", registration.scope);
+                            },
+                            function (err) {
+                                console.log("Worker registration failed", err);
+                            }
+                        )
+                        .catch(function (err) {
+                            console.log(err);
+                        });
+                });
+            } else {
+                console.log("Service Worker is not supported by browser.");
+            }
+        </script>
+        -->
+    </body>
 </html>
