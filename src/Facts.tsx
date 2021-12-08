@@ -119,7 +119,7 @@ function Facts() {
             </div>
 
             <div className="col facts-links">
-                <p>
+                <p className="w-100">
                     Fact URL:{" "}
                     <a href={factUrl} target="_blank" rel="noreferrer">
                         {factUrl}
