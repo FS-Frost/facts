@@ -3,6 +3,6 @@ import Facts from "./Facts";
 
 test("renders search button", async () => {
     render(<Facts />);
-    const searchButton = screen.getByText("Search fact");
+    const searchButton = screen.getByText("Next");
     expect(searchButton).toBeInTheDocument();
 });
