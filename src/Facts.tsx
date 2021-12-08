@@ -78,24 +78,29 @@ function Facts() {
 
     return (
         <div className="Facts">
-            <div className="facts-search">
-                {shouldShowJson ? <textarea value={rawResponse} readOnly /> : <p>{fact}</p>}
-                <br />
+            <div className="col mb-3 facts-search">
+                <textarea className="form-control fact" value={shouldShowJson ? rawResponse : fact} readOnly />
+            </div>
+
+            <div className="col mb-3 search">
                 <button
-                    className="btn-search"
+                    className="btn btn-primary w-100"
                     onClick={() => {
                         getFact();
                     }}
                     disabled={isLoading}
                 >
-                    Search fact
+                    Next
                 </button>
             </div>
 
-            <div>
-                <label htmlFor="languages">Language: </label>
+            <div className="input-group mb-3 w-100">
+                <label className="input-group-text" htmlFor="languages">
+                    Language:{" "}
+                </label>
                 <select
                     name="languages"
+                    className="form-select"
                     onChange={(e) => {
                         setLanguage(e.target.value);
                     }}
@@ -106,12 +111,14 @@ function Facts() {
                 </select>
             </div>
 
-            <div className="facts-debug">
-                <label>Debug mode</label>
-                <input type="checkbox" checked={shouldShowJson} onChange={toggleDebugMode} />
+            <div className="input-group-text mb-3 facts-debug">
+                <div className="input-group me-1 w-auto">
+                    <input className="form-check-input" type="checkbox" checked={shouldShowJson} onChange={toggleDebugMode} />
+                </div>
+                <label className="form-check-label">Debug mode</label>
             </div>
 
-            <div className="facts-links">
+            <div className="col facts-links">
                 <p>
                     Fact URL:{" "}
                     <a href={factUrl} target="_blank" rel="noreferrer">

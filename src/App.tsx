@@ -5,9 +5,9 @@ import Facts from "./Facts";
 function App() {
     return (
         <div className="App">
-            <header className="App-header">
-                <Facts></Facts>
-            </header>
+            <h1 className="mb-3">Random Facts</h1>
+
+            <Facts></Facts>
         </div>
     );
 }

@@ -1,17 +1,12 @@
-.btn-search {
-    width: fit-content;
+.search button {
     height: fit-content;
     font-size: large;
 }
 
-.facts-search p {
-    min-height: 80px;
-    overflow-wrap: anywhere;
-}
-
-.facts-search textarea {
-    width: 100%;
-    height: 150px;
+.facts-search textarea.fact {
+    height: 120px;
+    background-color: white;
+    text-align: justify;
 }
 
 .facts-links {
@@ -22,6 +17,9 @@
 
 .facts-links p {
     text-align: left;
-    width: 600px;
     font-size: large;
+}
+
+.facts-debug {
+    align-items: start;
 }
