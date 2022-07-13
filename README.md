@@ -4,6 +4,8 @@
 
 App to get random facts from [Random Useless Facts API](https://uselessfacts.jsph.pl/).
 
+https://fs-frost.github.io/facts
+
 ## Built with
 
 -   React
