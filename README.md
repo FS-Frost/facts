@@ -8,9 +8,9 @@ https://fs-frost.github.io/facts
 
 ## Built with
 
--   React
--   TypeScript
--   Jest
+-   [React](https://reactjs.org/)
+-   [TypeScript](https://www.typescriptlang.org/)
+-   [Jest](https://jestjs.io/)
 
 ## Use the app
 
