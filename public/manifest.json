@@ -13,7 +13,7 @@
     ],
     "screenshots": [
         {
-            "src": "logo512.png",
+            "src": "The src to your screenshot",
             "sizes": "2880x1800",
             "type": "image/png",
             "description": "The type of your image, such as image/png"
@@ -26,7 +26,7 @@
             "description": "A description of the functionality of this shortcut",
             "icons": [
                 {
-                    "src": "logo512.png",
+                    "src": "icon-96x96.png",
                     "type": "image/png",
                     "sizes": "96x96"
                 }
