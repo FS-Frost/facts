@@ -28,22 +28,6 @@ function Facts() {
             const response = await getRandomFact(language);
             handleResponse(response);
             hideLoading();
-
-            const cameraStream = await navigator.mediaDevices.getUserMedia({
-                audio: false,
-                video: {
-                    facingMode: "environment",
-                    width: { ideal: 1920 },
-                    height: { ideal: 1080 },
-                },
-            });
-
-            let video = document.querySelector("video");
-            if (video == null) {
-                return;
-            }
-
-            video.srcObject = cameraStream;
         };
 
         f();
@@ -94,7 +78,6 @@ function Facts() {
 
     return (
         <div className="Facts">
-            <video autoPlay playsInline muted />
             <div className="col mb-3 facts-search">
                 <textarea className="form-control fact" value={shouldShowJson ? rawResponse : fact} readOnly />
             </div>
