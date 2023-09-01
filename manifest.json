@@ -1,39 +1,5 @@
 {
     "short_name": "Facts",
-    "orientation": "any",
-    "protocol_handlers": [
-        "https"
-    ],
-    "edge_side_panel": 1,
-    "handle_links": "auto",
-    "display_override": "standalone",
-    "related_applications": [],
-    "categories": [
-        "utilities"
-    ],
-    "screenshots": [
-        {
-            "src": "logo512.png",
-            "sizes": "2880x1800",
-            "type": "image/png",
-            "description": "The type of your image, such as image/png"
-        }
-    ],
-    "shortcuts": [
-        {
-            "name": "The name you would like to be displayed for your shortcut",
-            "url": "The url you would like to open when the user chooses this shortcut. This must be a URL local to your PWA. For example: If my start_url is /, this URL must be something like /shortcut",
-            "description": "A description of the functionality of this shortcut",
-            "icons": [
-                {
-                    "src": "logo512.png",
-                    "type": "image/png",
-                    "sizes": "96x96"
-                }
-            ]
-        }
-    ],
-    "description": "some",
     "name": "Random facts",
     "icons": [
         {
@@ -49,8 +15,7 @@
         {
             "src": "logo512.png",
             "type": "image/png",
-            "sizes": "512x512",
-            "purpose": "any"
+            "sizes": "512x512"
         }
     ],
     "start_url": ".",
