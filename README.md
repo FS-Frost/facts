@@ -6,6 +6,8 @@ App to get random facts from [Random Useless Facts API](https://uselessfacts.jsp
 
 https://fs-frost.github.io/facts
 
+<img src="public/img/preview.png" alt="preview" />
+
 ## Built with
 
 -   [React](https://reactjs.org/)
