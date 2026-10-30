@@ -6,13 +6,13 @@ App to get random facts from [Random Useless Facts API](https://uselessfacts.jsp
 
 https://fs-frost.github.io/facts
 
-<img src="public/img/preview.png" alt="preview" />
-
 ## Built with
 
--   [React](https://reactjs.org/)
+-   [React](https://react.dev/)
 -   [TypeScript](https://www.typescriptlang.org/)
--   [Jest](https://jestjs.io/)
+-   [Vite](https://vite.dev/)
+-   [Bun](https://bun.sh/)
+-   [Vitest](https://vitest.dev/)
 
 ## Use the app
 
@@ -21,14 +21,21 @@ https://fs-frost.github.io/facts/
 ## Run locally
 
 ```shell
-yarn install
-yarn start
+bun install
+bun run dev
 ```
 
-Visit http://localhost:3000/facts
+Visit http://localhost:5173/facts/
 
 ## Run tests
 
 ```shell
-yarn run test
+bun run test
+```
+
+## Build
+
+```shell
+bun run build
+bun run preview
 ```

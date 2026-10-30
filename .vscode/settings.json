@@ -1,6 +1,5 @@
 {
     "editor.formatOnSave": true,
     "editor.formatOnSaveMode": "file",
-    "editor.tabSize": 4,
-    "jest.autoRun": "off"
+    "editor.tabSize": 4
 }
